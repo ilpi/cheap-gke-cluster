@@ -313,3 +313,12 @@ kubectl delete pods --field-selector status.phase=Failed --all-namespaces
 15. *Can I run more GKE nodes with the same cost model?*
 
     The provided solution has a scalable pricing model. You could, for example, run a six node, 24 core, 96GB RAM cluster for about $100 per month. The more nodes that you run, the less likely you will be severely impacted by concurrent node replacements. For a super-savvy startup that is great at building fault-tolerant applications, using the Spot VM nodes is very appealing. You can also combine with non-Spot VM node pools for handling stateful workloads. So, this solution may provide some compelling ideas for those under tight budget constraints that are willing to accept the risks.
+
+# Installing mainflux platform in cheap k8s cluster
+
+1. Run the terraform and create the cluster
+2. Run the following commands in order
+3. kubectl create namespace mf
+4. kubectl create ns ingress-nginx
+5. helm install ingress-nginx stable/nginx-ingress -n ingress-nginx --set rbac.create=true
+6. helm install --dependency-update mainflux . -n mf
